@@ -9,7 +9,7 @@
   function easeOut(x) { x = x < 0 ? 0 : x > 1 ? 1 : x; return 1 - Math.pow(1 - x, 3); }
   function ang(k) { return k * Math.PI / 3; } // flat-top: vertices at 0°, 60°, …
 
-  var LEVELS = 14;
+  var LEVELS = 24;
 
   function Field(cv, opt) { this.cv = cv; this.ctx = cv.getContext('2d'); this.opt = opt || {}; }
 
@@ -147,8 +147,10 @@
     for (var i = 0; i < list.length; i++) { var c = list[i]; c.h = Math.max(0, Math.min(1, c.h0 + c.amp * Math.sin(TAU * t / c.per + c.ph))); }
     list.sort(function (a, b) { return a.h - b.h; });
     for (var j = 0; j < list.length; j++) {
-      var cl = list[j], l = Math.round(cl.h * (LEVELS - 1)), lift = (cl.h - 0.38) * 5 * this.dpr;
-      g.drawImage(this.spr[l], cl.x - half, cl.y - half - lift);
+      // blend the two nearest height sprites, so shadows and shading change continuously (no steps)
+      var cl = list[j], lf = cl.h * (LEVELS - 1), l0 = Math.min(LEVELS - 2, Math.floor(lf)), fr = lf - l0, lift = (cl.h - 0.38) * 5 * this.dpr;
+      g.drawImage(this.spr[l0], cl.x - half, cl.y - half - lift);
+      if (fr > 0.004) { g.globalAlpha = fr; g.drawImage(this.spr[l0 + 1], cl.x - half, cl.y - half - lift); g.globalAlpha = 1; }
     }
     // gold seams: each slot lights up slowly from the middle, holds, then fades; strength varies
     var slots = W / this.dpr < 700 ? 3 : 4, T = 16;
