@@ -64,6 +64,22 @@ p{margin:0}
 .rmedia{aspect-ratio:1/1;max-width:100%;border-radius:14px;overflow:hidden;background:#0A0E12;display:flex;justify-content:center;box-shadow:0 0 0 1px rgba(14,20,24,.18),0 10px 24px -14px rgba(0,0,0,.6)}
 .rmedia img{display:block;width:100%;height:100%;object-fit:cover}
 .rmedia video{display:block;height:100%;width:auto;max-width:100%;aspect-ratio:9/16;object-fit:cover}
+.rmedia.rvid{position:relative}
+/* the frosting clip fills the frame, the tattoo sits in the middle */
+.rmedia.rvid video{position:absolute;left:-5.5%;top:-72%;width:118%;max-width:none;height:auto;aspect-ratio:9/16}
+/* click to enlarge */
+.zoomable{position:relative;cursor:zoom-in}
+.zoomable::after{content:"";position:absolute;right:10px;top:10px;width:30px;height:30px;border-radius:50%;pointer-events:none;
+  background:rgba(8,12,16,.72) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E6F3F5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7'/%3E%3C/svg%3E") center/15px no-repeat;
+  box-shadow:0 0 0 1px rgba(255,255,255,.14);opacity:.85;transition:opacity .2s,transform .2s}
+.zoomable:hover::after,.zoomable:focus-visible::after{opacity:1;transform:scale(1.08)}
+.zoomable:focus-visible{outline:2px solid #3DF5FF;outline-offset:3px}
+.lb{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;padding:calc(56px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:rgba(3,5,8,.92);backdrop-filter:blur(6px)}
+.lb[hidden]{display:none}
+.lb-media{max-width:min(1100px,100%);max-height:100%;display:flex;align-items:center;justify-content:center}
+.lb-media img,.lb-media video{display:block;max-width:100%;max-height:calc(100vh - 110px);width:auto;height:auto;border-radius:14px;box-shadow:0 30px 80px -20px rgba(0,0,0,.8);background:#000}
+.lb-close{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(16,22,28,.9);color:#E6F3F5;font:400 26px/1 system-ui,sans-serif;cursor:pointer}
+.lb-close:focus-visible{outline:2px solid #3DF5FF;outline-offset:2px}
 .rcard figcaption{display:flex;flex-direction:column;gap:2px;padding:0 4px 2px;font-size:14px;line-height:1.4;color:var(--muted)}
 .rcard figcaption b{color:var(--fg);font-weight:600;font-size:15px}
 @media (max-width:900px){.rgrid{grid-template-columns:minmax(0,1fr);max-width:360px}}
@@ -320,15 +336,15 @@ footer{padding-block:72px 96px;border-top:1px solid rgba(255,255,255,.07);backgr
         </div>
         <div class="rgrid">
           <figure class="rcard metal-light">
-            <div class="rmedia"><img src="https://stanleykobrick.github.io/removaltattoo/ba/wrist-collage-en.webp" alt="Three photos of a fine-line wrist tattoo: before treatment, after session 1 much lighter, after session 2 only a few faint dots" width="900" height="900" loading="lazy"></div>
+            <div class="rmedia zoomable" data-zoom tabindex="0" role="button" aria-label="Enlarge photo: fine-line wrist tattoo"><img src="https://stanleykobrick.github.io/removaltattoo/ba/wrist-collage-en.webp" alt="Three photos of a fine-line wrist tattoo: before treatment, after session 1 much lighter, after session 2 only a few faint dots" width="900" height="900" loading="lazy"></div>
             <figcaption><b>Fine-line wrist tattoo</b><span>Black ink · 2 sessions</span></figcaption>
           </figure>
           <figure class="rcard metal-light">
-            <div class="rmedia"><img src="https://stanleykobrick.github.io/removaltattoo/ba/brows-en.webp" alt="Eyebrow tattoo before laser treatment, dark grey, and after, much lighter and faded" width="800" height="800" loading="lazy"></div>
+            <div class="rmedia zoomable" data-zoom tabindex="0" role="button" aria-label="Enlarge photo: eyebrow tattoo before and after"><img src="https://stanleykobrick.github.io/removaltattoo/ba/brows-en.webp" alt="Eyebrow tattoo before laser treatment, dark grey, and after, much lighter and faded" width="800" height="800" loading="lazy"></div>
             <figcaption><b>Eyebrow tattoo (microblading)</b><span>Faded after 1 session · eyebrows usually need 1–2</span></figcaption>
           </figure>
           <figure class="rcard metal-light">
-            <div class="rmedia rvid"><video id="frostVid" src="https://stanleykobrick.github.io/removaltattoo/frost.mp4" poster="https://stanleykobrick.github.io/removaltattoo/frost-poster.jpg" muted loop playsinline preload="metadata" aria-label="Video: a tattoo right after a laser pass, the lines turn white"></video></div>
+            <div class="rmedia rvid zoomable" data-zoom tabindex="0" role="button" aria-label="Enlarge video: right after a session"><video id="frostVid" src="https://stanleykobrick.github.io/removaltattoo/frost.mp4" poster="https://stanleykobrick.github.io/removaltattoo/frost-poster.jpg" muted loop playsinline preload="metadata" aria-label="Video: a tattoo right after a laser pass, the lines turn white"></video></div>
             <figcaption><b>Right after a session</b><span>The ink turns white for a few minutes, then fades over the following weeks</span></figcaption>
           </figure>
         </div>
@@ -380,7 +396,7 @@ footer{padding-block:72px 96px;border-top:1px solid rgba(255,255,255,.07);backgr
         <p class="muted">The laser sends very short pulses of light into the skin. The ink absorbs the energy and breaks into tiny particles.</p>
         <p class="muted">Over the following weeks your body clears those particles away naturally. That's why the tattoo keeps fading between sessions, and why sessions are 6–8 weeks apart.</p>
         <figure class="film macro">
-          <video id="macroVid" src="https://stanleykobrick.github.io/removaltattoo/macrophage.mp4" poster="https://stanleykobrick.github.io/removaltattoo/macrophage-poster.jpg" muted loop playsinline preload="metadata" aria-label="Illustration: an immune cell (macrophage) collecting broken-down ink particles in the skin"></video>
+          <div class="zoomable" data-zoom tabindex="0" role="button" aria-label="Enlarge video: macrophage"><video id="macroVid" src="https://stanleykobrick.github.io/removaltattoo/macrophage.mp4" poster="https://stanleykobrick.github.io/removaltattoo/macrophage-poster.jpg" muted loop playsinline preload="metadata" aria-label="Illustration: an immune cell (macrophage) collecting broken-down ink particles in the skin"></video></div>
           <figcaption>Inside the skin · a macrophage collects the broken ink</figcaption>
         </figure>
       </div>
@@ -422,7 +438,7 @@ footer{padding-block:72px 96px;border-top:1px solid rgba(255,255,255,.07);backgr
 
   <section id="about" class="sec b-deep on-dark">
     <div class="wrap split">
-      <div class="portrait metal photo"><img src="https://stanleykobrick.github.io/removaltattoo/about.webp" alt="Andrew, laser tattoo removal specialist, sitting in a leather armchair" width="920" height="820" loading="lazy"></div>
+      <div class="portrait metal photo zoomable" data-zoom tabindex="0" role="button" aria-label="Enlarge photo of Andrew"><img src="https://stanleykobrick.github.io/removaltattoo/about.webp" alt="Andrew, laser tattoo removal specialist, sitting in a leather armchair" width="920" height="820" loading="lazy"></div>
       <div class="stack">
         <div class="label">About me</div>
         <h2>Hi, I'm Andrew</h2>
@@ -535,6 +551,33 @@ footer{padding-block:72px 96px;border-top:1px solid rgba(255,255,255,.07);backgr
     function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected, press Ctrl+C';}
     try{navigator.clipboard.writeText(t).then(function(){b.textContent='Copied';},sel);}catch(e){sel();}
   });
+})();
+</script>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Enlarged view">
+  <button class="lb-close" type="button" id="lbClose" aria-label="Close">×</button>
+  <div class="lb-media" id="lbMedia"></div>
+</div>
+<script>
+(function(){
+  var lb=document.getElementById('lb'),box=document.getElementById('lbMedia'),btn=document.getElementById('lbClose'),back=null;
+  function open(z){
+    var img=z.querySelector('img'),vid=z.querySelector('video'),el;
+    box.innerHTML='';
+    if(vid){el=document.createElement('video');el.src=vid.currentSrc||vid.src;if(vid.poster)el.poster=vid.poster;el.controls=true;el.muted=true;el.loop=true;el.playsInline=true;el.setAttribute('playsinline','');el.autoplay=true;el.setAttribute('aria-label',vid.getAttribute('aria-label')||'Video');}
+    else if(img){el=document.createElement('img');el.src=img.currentSrc||img.src;el.alt=img.alt;}
+    if(!el)return;
+    box.appendChild(el);back=z;lb.hidden=false;document.documentElement.style.overflow='hidden';btn.focus();
+    if(vid){var p=el.play();if(p&&p.catch)p.catch(function(){});}
+  }
+  function close(){if(lb.hidden)return;var v=box.querySelector('video');if(v)v.pause();box.innerHTML='';lb.hidden=true;document.documentElement.style.overflow='';if(back)back.focus();}
+  document.querySelectorAll('[data-zoom]').forEach(function(z){
+    z.addEventListener('click',function(){open(z);});
+    z.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open(z);}});
+  });
+  btn.addEventListener('click',close);
+  lb.addEventListener('click',function(e){if(e.target===lb||e.target===box)close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
 })();
 </script>
 
