@@ -1,0 +1,542 @@
+<!-- removaltattoo.co.uk — new home page (one Tilda T123 HTML block). Assets: https://stanleykobrick.github.io/removaltattoo/ -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: "anodised titanium + neon" — one vertical colour journey: graphite hero → gunmetal → brushed-steel band (results, why, price) → gunmetal → graphite film/FAQ/footer. Single deliberate look. */
+:root{
+  --graphite:#080B0F; --graphite-2:#10161C; --gunmetal:#1B232A; --gun-2:#151B21;
+  --steel-1:#BAC3C9; --steel-2:#D3D9DD; --steel-3:#E0E4E7;
+  --cyan:#3DF5FF; --cyan-deep:#04525A; --cyan-ink:#032227; --red:#FF3B57;
+  --fg:#E6F3F5; --muted:#A0B1BA; --dim:#7A8B94; --line:rgba(255,255,255,.09); --accent-t:#3DF5FF;
+  --display:"Chakra Petch",ui-sans-serif,system-ui,sans-serif;
+  --body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+.on-dark{--fg:#E6F3F5;--muted:#A0B1BA;--dim:#7A8B94;--line:rgba(255,255,255,.09);--accent-t:#3DF5FF;color:var(--fg)}
+.on-steel{--fg:#0E1418;--muted:#2C3740;--dim:#3C4850;--line:rgba(14,20,24,.16);--accent-t:#04525A;color:var(--fg)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--graphite);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--graphite)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:70;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:var(--accent-t)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.015em;text-wrap:balance;margin:0}
+h2{font-size:clamp(30px,4.2vw,46px);line-height:1.04;font-weight:700}
+h3{font-size:20px;font-weight:600;line-height:1.25}
+p{margin:0}
+.muted{color:var(--muted)}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-t);display:flex;align-items:center;gap:10px}
+.label::before{content:"";width:7px;height:7px;background:var(--red);transform:rotate(45deg);flex:none}
+.sec{padding-block:92px}
+.head{display:flex;flex-direction:column;gap:14px;max-width:700px}
+
+/* ---- bands: each starts on the colour the previous one ends on ---- */
+.b-hero{background:
+  radial-gradient(ellipse 60% 70% at 78% 35%,rgba(61,245,255,.09),transparent 70%),
+  radial-gradient(ellipse 50% 60% at 10% 100%,rgba(255,59,87,.05),transparent 70%),
+  repeating-linear-gradient(90deg,rgba(255,255,255,.014) 0 1px,transparent 1px 3px),
+  linear-gradient(180deg,var(--graphite),var(--graphite-2))}
+.b-ticker{background:linear-gradient(180deg,var(--graphite-2),var(--gunmetal))}
+.seam{height:200px}
+.seam-down{background:linear-gradient(180deg,var(--gunmetal) 0%,#4B565E 45%,var(--steel-1) 100%)}
+.seam-up{background:linear-gradient(180deg,var(--steel-3) 0%,#6A757D 50%,var(--gunmetal) 100%)}
+.b-steel{background:
+  radial-gradient(ellipse 70% 40% at 85% 8%,rgba(255,255,255,.35),transparent 70%),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0 1px,transparent 1px 3px),
+  linear-gradient(180deg,var(--steel-1) 0%,var(--steel-2) 45%,var(--steel-3) 100%)}
+.b-steel .sec:first-child{padding-top:24px}
+.b-gun{background:repeating-linear-gradient(90deg,rgba(255,255,255,.012) 0 1px,transparent 1px 3px),linear-gradient(180deg,var(--gunmetal),var(--gun-2))}
+.b-gun2{background:linear-gradient(180deg,var(--gun-2),var(--graphite-2))}
+.b-film{background:radial-gradient(ellipse 60% 50% at 50% 60%,rgba(61,245,255,.07),transparent 70%),linear-gradient(180deg,var(--graphite-2),#0B0F14)}
+.hex{position:relative;isolation:isolate}
+.hexcv{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;display:block;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 12%,#000 70%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 12%,#000 70%,transparent 100%)}
+.hexcv{opacity:.7}
+.hex.hex-soft .hexcv{opacity:.38}
+.film.macro{margin:10px 0 0;max-width:520px}
+.film.macro video{aspect-ratio:16/9}
+.macro figcaption{display:flex;align-items:center;gap:8px;padding:10px 6px 2px;font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#A0B1BA}
+.macro figcaption::before{content:"";width:6px;height:6px;border-radius:50%;background:#3DF5FF;box-shadow:0 0 8px #3DF5FF}
+.rgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:36px 0 0;max-width:960px}
+.rcard{margin:0;padding:14px;display:flex;flex-direction:column;gap:12px;min-width:0;border-radius:22px}
+.rmedia{aspect-ratio:1/1;max-width:100%;border-radius:14px;overflow:hidden;background:#0A0E12;display:flex;justify-content:center;box-shadow:0 0 0 1px rgba(14,20,24,.18),0 10px 24px -14px rgba(0,0,0,.6)}
+.rmedia img{display:block;width:100%;height:100%;object-fit:cover}
+.rmedia video{display:block;height:100%;width:auto;max-width:100%;aspect-ratio:9/16;object-fit:cover}
+.rcard figcaption{display:flex;flex-direction:column;gap:2px;padding:0 4px 2px;font-size:14px;line-height:1.4;color:var(--muted)}
+.rcard figcaption b{color:var(--fg);font-weight:600;font-size:15px}
+@media (max-width:900px){.rgrid{grid-template-columns:minmax(0,1fr);max-width:360px}}
+.portrait.photo{padding:0;overflow:hidden}
+.portrait.photo img{width:100%;height:100%;border-radius:inherit;object-fit:cover;object-position:52% 40%;box-shadow:none}
+.revpanel{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:center;padding:36px 40px;border-radius:26px}
+.revside{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.revside .stars{font-size:22px;letter-spacing:4px}
+@media (max-width:900px){.revpanel{grid-template-columns:minmax(0,1fr);padding:26px}}
+.b-deep{background:linear-gradient(180deg,#0B0F14,#0E1419)}
+.b-deep2{background:linear-gradient(180deg,#0E1419,#090C10)}
+
+/* ---- metal surfaces ---- */
+.metal{border-radius:20px;border:1px solid rgba(255,255,255,.07);
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.022) 0 1px,transparent 1px 4px),linear-gradient(180deg,#202A31,#141A20);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1),inset 0 -1px 0 rgba(0,0,0,.6),0 24px 48px -28px rgba(0,0,0,.85)}
+.metal-light{border-radius:20px;border:1px solid rgba(14,20,24,.12);
+  background:repeating-linear-gradient(90deg,rgba(0,0,0,.028) 0 1px,transparent 1px 4px),linear-gradient(180deg,#F2F5F7,#CFD6DB);
+  box-shadow:inset 0 1px 0 #fff,inset 0 -1px 0 rgba(14,20,24,.2),0 22px 44px -28px rgba(20,32,44,.6)}
+
+/* ---- buttons ---- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:12px;font:600 16px var(--body);text-decoration:none;cursor:pointer;border:1px solid transparent;transition:transform .2s,box-shadow .2s,border-color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible,button:focus-visible,summary:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.on-steel a:focus-visible,.on-steel button:focus-visible{outline-color:#04525A}
+.btn-main{background:linear-gradient(180deg,#7FF9FF,var(--cyan) 45%,#22D3DE);color:var(--cyan-ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 0 0 1px rgba(61,245,255,.4),0 8px 26px -8px rgba(61,245,255,.55)}
+.btn-main:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 0 0 1px rgba(61,245,255,.6),0 12px 36px -6px rgba(61,245,255,.7)}
+.btn-ghost{color:#E6F3F5;border-color:rgba(255,255,255,.12);
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0 1px,transparent 1px 4px),linear-gradient(180deg,#2A343C,#171E24);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -1px 0 rgba(0,0,0,.6)}
+.btn-ghost:hover{border-color:rgba(61,245,255,.6)}
+.btn svg{flex:none}
+
+/* ---- header ---- */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(8,11,15,.82);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.07)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
+.brand{display:flex;align-items:center;gap:10px;color:#E6F3F5;text-decoration:none;font:600 17px var(--display)}
+.brand img{width:38px;height:38px;border-radius:50%;box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+nav.links{display:flex;gap:26px;font-size:15px}
+nav.links a{color:#A0B1BA;text-decoration:none}
+nav.links a:hover{color:#E6F3F5}
+.top .btn{min-height:42px;padding:0 16px;font-size:15px}
+
+/* ---- hero ---- */
+.hero{padding-block:60px 84px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:56px;align-items:center}
+.hero h1{font-size:clamp(42px,6vw,72px);line-height:.98;font-weight:700;margin-top:18px;letter-spacing:-.025em;color:#E6F3F5}
+.hero h1 em{font-style:normal;color:var(--cyan);text-shadow:0 0 18px rgba(61,245,255,.45),0 0 2px rgba(61,245,255,.8)}
+@supports (-webkit-background-clip:text) or (background-clip:text){
+  .hero h1 .sheen{background:linear-gradient(100deg,#E6F3F5 0%,#E6F3F5 42%,#FFFFFF 48%,#9FB4BE 52%,#E6F3F5 58%,#E6F3F5 100%);background-size:300% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:sheen 2.6s cubic-bezier(.4,0,.2,1) .5s 1 both}
+}
+@keyframes sheen{from{background-position:100% 0}to{background-position:0 0}}
+.lede{font-size:19px;color:var(--muted);margin-top:22px;max-width:36ch}
+.plates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:28px;max-width:540px}
+.plate{padding:14px 16px;border-radius:14px;display:flex;flex-direction:column;gap:2px;min-width:0;position:relative}
+.plate b{font:700 22px/1.1 var(--display);color:var(--cyan);letter-spacing:-.01em}
+.plate span{font-size:13px;color:var(--muted);line-height:1.35}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.small{font-size:14px;color:var(--dim);margin-top:14px}
+.window{display:flex;flex-direction:column;gap:16px;min-width:0}
+.bezel{position:relative;padding:16px;border-radius:32px;
+  background:linear-gradient(145deg,#5A666F 0%,#222A31 22%,#3B464E 48%,#141A1F 72%,#4A555D 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -2px 3px rgba(0,0,0,.6),0 0 0 1px rgba(0,0,0,.7),0 40px 80px -36px rgba(0,0,0,.95),0 0 80px -30px rgba(61,245,255,.25)}
+.bezel::before{content:"";position:absolute;inset:7px;border-radius:26px;border:1px solid rgba(255,255,255,.08);pointer-events:none}
+.screw{position:absolute;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#C9D1D6,#4E5961 60%,#1D2329);box-shadow:0 1px 1px rgba(0,0,0,.6)}
+.screw::after{content:"";position:absolute;left:1px;right:1px;top:3.5px;height:1px;background:rgba(0,0,0,.55);transform:rotate(35deg)}
+.screw.tl{left:12px;top:12px}.screw.tr{right:12px;top:12px}.screw.bl{left:12px;bottom:12px}.screw.br{right:12px;bottom:12px}
+.stage{position:relative;width:100%;max-width:100%;aspect-ratio:11/8;border-radius:18px;overflow:hidden;background:#F6ECE6}
+.stage::after{content:"";position:absolute;inset:0;border-radius:18px;box-shadow:inset 0 2px 10px rgba(0,0,0,.45),inset 0 0 0 1px rgba(0,0,0,.4);pointer-events:none}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stage .tag{position:absolute;left:12px;top:12px;z-index:1;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:#E6F3F5;background:rgba(8,11,15,.72);padding:5px 9px;border-radius:7px}
+.phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;list-style:none;margin:0;padding:0 4px}
+.phases li{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--dim);line-height:1.35;min-width:0;transition:color .4s}
+.phases li::before{content:"";height:3px;border-radius:3px;background:rgba(255,255,255,.1);transition:background .4s,box-shadow .4s}
+.phases li.on{color:#E6F3F5}
+.phases li.on::before{background:var(--cyan);box-shadow:0 0 10px rgba(61,245,255,.7)}
+.phases b{font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.phases li.on b{color:var(--cyan)}
+
+/* ---- ticker ---- */
+.ticker{overflow:hidden;border-block:1px solid rgba(255,255,255,.07)}
+.ticker-track{display:flex;gap:48px;width:max-content;padding-block:14px;font-family:var(--mono);font-size:13px;color:#A0B1BA;white-space:nowrap;animation:tick 34s linear infinite}
+.ticker-track span::before{content:"◆";color:var(--red);margin-right:12px;font-size:9px;vertical-align:2px}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ---- results (steel) ---- */
+.results{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:48px;align-items:center}
+.ba-plate{padding:22px 22px 18px;position:relative;max-width:100%}
+.ba{display:grid;grid-template-columns:repeat(3,minmax(0,180px));gap:22px;margin:0;position:relative}
+.ba::before{content:"";position:absolute;left:8%;right:8%;top:calc(50% - 22px);height:2px;border-radius:2px;background:linear-gradient(90deg,#2C3740,#04525A 55%,var(--red));z-index:0}
+.ba figure{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0;position:relative;z-index:1}
+.ba .ph{padding:4px;border-radius:12px;background:linear-gradient(160deg,#FFFFFF,#9BA6AE);box-shadow:0 10px 22px -12px rgba(14,20,24,.6)}
+.ba img{display:block;width:100%;height:auto;max-width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:9px;background:#C8CFD4}
+.ba figcaption{display:flex;flex-direction:column;gap:4px;align-items:flex-start;font-size:13px;color:var(--muted);line-height:1.3}
+.ba figcaption b{font:600 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--fg)}
+.ba .hot{background:var(--red);color:#14040A;padding:2px 7px;border-radius:5px;letter-spacing:.1em}
+.note{font-size:14px;color:var(--dim)}
+
+/* ---- cards ---- */
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:44px}
+.card{padding:28px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.stat{font:700 44px/1 var(--display);letter-spacing:-.03em;color:var(--accent-t)}
+.on-dark .stat{text-shadow:0 0 18px rgba(61,245,255,.35)}
+
+/* ---- price (dark anodised panel on steel) ---- */
+.price{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:center;padding:46px;border-radius:28px;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse 70% 90% at 0% 0%,rgba(61,245,255,.14),transparent 60%),repeating-linear-gradient(90deg,rgba(255,255,255,.022) 0 1px,transparent 1px 4px),linear-gradient(150deg,#1E2A31,#0F161B 60%,#18222A);
+  border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 -1px 0 rgba(0,0,0,.7),0 40px 70px -36px rgba(14,20,24,.9)}
+.ptable{display:grid;gap:8px}
+.prow{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:15px 18px;border-radius:12px;background:rgba(5,8,12,.5);border:1px solid rgba(255,255,255,.07);font-variant-numeric:tabular-nums}
+.prow b{font:600 15px var(--mono);color:var(--cyan);white-space:nowrap}
+
+/* ---- video split ---- */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+.vid{position:relative;max-width:340px;width:100%;justify-self:center;padding:10px;border-radius:30px;
+  background:linear-gradient(145deg,#56626B,#1A2127 30%,#36414A 60%,#12171C);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 40px 70px -36px rgba(0,0,0,.95)}
+.vid video{display:block;width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:21px;background:#000}
+.snd{position:absolute;right:20px;bottom:20px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(8,11,15,.82);color:#E6F3F5;font:600 14px var(--body);cursor:pointer}
+.snd[aria-pressed="true"]{border-color:var(--cyan);color:var(--cyan)}
+.stack{display:flex;flex-direction:column;gap:16px;min-width:0}
+
+/* ---- steps ---- */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;margin-top:44px;counter-reset:s;list-style:none;padding:0}
+.step{padding:22px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.step::before{counter-increment:s;content:"0" counter(s);font:600 14px var(--mono);color:var(--red)}
+
+/* ---- film ---- */
+.film{position:relative;margin-top:36px;padding:12px;border-radius:30px;
+  background:linear-gradient(145deg,#56626B,#1A2127 25%,#323C44 55%,#12171C 80%,#3E4951);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 50px 90px -40px rgba(0,0,0,.95),0 0 120px -50px rgba(61,245,255,.35)}
+.film video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:20px;background:#000}
+.film .snd{right:26px;bottom:26px}
+
+/* ---- about ---- */
+.portrait{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;aspect-ratio:4/5;max-width:100%;color:var(--dim);font-family:var(--mono);font-size:13px;text-align:center;padding:24px}
+.portrait img{width:150px;height:150px;border-radius:50%;box-shadow:0 0 0 1px rgba(255,255,255,.1),0 0 50px -10px rgba(255,59,87,.35)}
+.stars{color:#F5C451;letter-spacing:2px}
+
+/* ---- faq ---- */
+.faq{max-width:860px;margin-top:32px;border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:18px;padding:20px 0;font:600 18px var(--display)}
+summary::-webkit-details-marker{display:none}
+summary span{color:var(--cyan);transition:transform .25s;flex:none}
+details[open] summary span{transform:rotate(45deg)}
+details p{color:var(--muted);padding-bottom:20px;max-width:68ch}
+
+/* ---- footer ---- */
+footer{padding-block:72px 96px;border-top:1px solid rgba(255,255,255,.07);background:linear-gradient(180deg,#090C10,#05070A)}
+.foot{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px}
+.copyline{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px;font-family:var(--mono);font-size:15px}
+.copyline button{min-height:40px;padding:0 14px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:transparent;color:#E6F3F5;font:600 13px var(--body);cursor:pointer}
+.info{display:flex;flex-direction:column;gap:6px;font-size:16px}
+
+/* ---- sticky mobile CTA ---- */
+.dock{display:none}
+@media (max-width:900px){
+  nav.links{display:none}
+  .hero-grid,.split,.price,.foot,.results{grid-template-columns:minmax(0,1fr);gap:32px}
+  .grid3{grid-template-columns:minmax(0,1fr)}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sec{padding-block:64px}
+  .seam{height:140px}
+  .price{padding:26px}
+  .stage{aspect-ratio:5/4}
+  .bezel{padding:12px;border-radius:26px}
+  .bezel::before{inset:5px;border-radius:22px}
+  .screw.tl,.screw.bl{left:8px}.screw.tr,.screw.br{right:8px}.screw.tl,.screw.tr{top:8px}.screw.bl,.screw.br{bottom:8px}
+  .dock{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:55;gap:8px;padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:rgba(8,11,15,.95);border-top:1px solid rgba(255,255,255,.08)}
+  .dock .btn{flex:1;min-height:48px;padding:0 10px}
+  body{padding-bottom:76px}
+}
+@media (max-width:560px){
+  .plates{grid-template-columns:minmax(0,1fr)}
+  .plate{flex-direction:row;align-items:baseline;justify-content:space-between;gap:12px}
+  .ba{gap:10px}
+  .ba-plate{padding:14px 12px 12px}
+  .ba::before{top:calc(50% - 26px)}
+  .phases{gap:8px}
+}
+@media (max-width:480px){.steps{grid-template-columns:minmax(0,1fr)}.top .btn{display:none}}
+@media (prefers-reduced-motion:reduce){
+  .ticker-track{animation:none}.btn,.phases li,.phases li::before{transition:none}
+  .hero h1 .sheen{animation:none;background-position:0 0}
+}
+</style>
+
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="https://stanleykobrick.github.io/removaltattoo/logo.webp" alt="" width="38" height="38">Andrew Laserman</a>
+    <nav class="links" aria-label="Sections">
+      <a href="#results">Results</a><a href="#price">Price</a><a href="#how">How it works</a><a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-main" href="mailto:wolfinklaser@gmail.com?subject=Tattoo%20removal%20quote">Free quote</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero b-hero on-dark hex">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="label">Exeter city centre · Wolf Ink Studios</div>
+        <h1><span class="sheen">Laser Tattoo Removal in</span> <em>Exeter</em></h1>
+        <p class="lede">13 years with the laser and minimal scarring. Full removal, fading for a cover-up, and eyebrow (microblading) removal.</p>
+        <div class="plates">
+          <div class="plate metal"><b>from £30</b><span>per session</span></div>
+          <div class="plate metal"><b>Free</b><span>online consultation</span></div>
+          <div class="plate metal"><b>2–8 pm</b><span>every day, by appointment</span></div>
+        </div>
+        <div class="cta">
+          <a class="btn btn-main" href="mailto:wolfinklaser@gmail.com?subject=Tattoo%20removal%20quote&amp;body=Hi%20Andrew%2C%20I%27ve%20attached%20a%20photo%20of%20my%20tattoo.">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg>
+            Email a photo for a free quote</a>
+          <a class="btn btn-ghost" href="https://ig.me/m/andrew_laserman" target="_blank" rel="noopener">Message on Instagram</a>
+        </div>
+        <p class="small">Send a photo of your tattoo. I'll reply with a price and how many sessions it's likely to take.</p>
+      </div>
+      <div class="window">
+        <div class="bezel">
+          <span class="screw tl" aria-hidden="true"></span><span class="screw tr" aria-hidden="true"></span><span class="screw bl" aria-hidden="true"></span><span class="screw br" aria-hidden="true"></span>
+          <div class="stage" role="img" aria-label="Animation: a pulse of light breaks tattoo ink into tiny particles, macrophages swallow them and the body carries the ink away">
+            <canvas id="hero"></canvas>
+            <span class="tag" aria-hidden="true">INSIDE THE SKIN</span>
+          </div>
+        </div>
+        <ol class="phases" id="phases" aria-hidden="true">
+          <li class="on"><b>Pulse</b>Light breaks the ink into tiny particles</li>
+          <li><b>Engulf</b>Macrophages swallow the particles</li>
+          <li><b>Clear</b>Your body carries the ink away</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker b-ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>13 years of laser experience</span><span>Black &amp; coloured ink</span><span>Eyebrow &amp; microblading removal</span><span>Fading for cover-ups</span><span>Quote by photo</span><span>Wolf Ink Studios, Exeter</span>
+      <span>13 years of laser experience</span><span>Black &amp; coloured ink</span><span>Eyebrow &amp; microblading removal</span><span>Fading for cover-ups</span><span>Quote by photo</span><span>Wolf Ink Studios, Exeter</span>
+    </div>
+  </div>
+
+  <div class="seam seam-down" aria-hidden="true"></div>
+
+  <div class="b-steel on-steel">
+    <section id="results" class="sec">
+      <div class="wrap">
+        <div class="results">
+          <div class="stack">
+            <div class="label">Real results</div>
+            <h2>Real clients, unretouched photos</h2>
+            <p class="muted">A fine-line wrist tattoo cleared in two sessions, and an eyebrow tattoo (microblading) faded with the laser. Photos are from my clients, taken before treatment and after the sessions.</p>
+            <p class="note">More results on Instagram: <a href="https://www.instagram.com/andrew_laserman" target="_blank" rel="noopener">@andrew_laserman</a></p>
+          </div>
+        </div>
+        <div class="rgrid">
+          <figure class="rcard metal-light">
+            <div class="rmedia"><img src="https://stanleykobrick.github.io/removaltattoo/ba/wrist-collage-en.webp" alt="Three photos of a fine-line wrist tattoo: before treatment, after session 1 much lighter, after session 2 only a few faint dots" width="900" height="900" loading="lazy"></div>
+            <figcaption><b>Fine-line wrist tattoo</b><span>Black ink · 2 sessions</span></figcaption>
+          </figure>
+          <figure class="rcard metal-light">
+            <div class="rmedia"><img src="https://stanleykobrick.github.io/removaltattoo/ba/brows-en.webp" alt="Eyebrow tattoo before laser treatment, dark grey, and after, much lighter and faded" width="800" height="800" loading="lazy"></div>
+            <figcaption><b>Eyebrow tattoo (microblading)</b><span>Faded after 1 session · eyebrows usually need 1–2</span></figcaption>
+          </figure>
+          <figure class="rcard metal-light">
+            <div class="rmedia rvid"><video id="frostVid" src="https://stanleykobrick.github.io/removaltattoo/frost.mp4" poster="https://stanleykobrick.github.io/removaltattoo/frost-poster.jpg" muted loop playsinline preload="metadata" aria-label="Video: a tattoo right after a laser pass, the lines turn white"></video></div>
+            <figcaption><b>Right after a session</b><span>The ink turns white for a few minutes, then fades over the following weeks</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" style="padding-top:0">
+      <div class="wrap">
+        <div class="head">
+          <div class="label">Why clients choose me</div>
+          <h2>The result depends on the hands, not just the laser</h2>
+        </div>
+        <div class="grid3">
+          <div class="card metal-light"><div class="stat">13 yrs</div><h3>With the laser</h3><p class="muted">Every size, colour and skin type. I know what each tattoo needs from the first look.</p></div>
+          <div class="card metal-light"><div class="stat">1 : 1</div><h3>Settings for your skin</h3><p class="muted">Power and spot size are set for your skin and your ink, which keeps scarring to a minimum.</p></div>
+          <div class="card metal-light"><div class="stat">No hype</div><h3>Straight answers</h3><p class="muted">If you need 3 sessions, I'll say 3. If laser isn't right for you, I'll tell you that too.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="price" class="sec" style="padding-top:0">
+      <div class="wrap">
+        <div class="price on-dark">
+          <div class="stack">
+            <div class="label">Price</div>
+            <h2>From £30 per session</h2>
+            <p class="muted">The exact price depends on the size, colours and age of the tattoo. Send a photo and get a personal price with an estimate of sessions. It's free, with no obligation.</p>
+            <div class="cta" style="margin-top:4px"><a class="btn btn-main" href="mailto:wolfinklaser@gmail.com?subject=Tattoo%20removal%20quote">Email a photo for a free quote</a></div>
+          </div>
+          <div class="ptable">
+            <div class="prow"><span>Tiny: dots, small birds, initials</span><b>from £30</b></div>
+            <div class="prow"><span>Standard tattoos</span><b>from £60</b></div>
+            <div class="prow"><span>Eyebrow tattoo (microblading)</span><b>from £80</b></div>
+            <div class="prow"><span>Online consultation</span><b>free</b></div>
+            <div class="prow"><span>Payment</span><b>per session</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="seam seam-up" aria-hidden="true"></div>
+
+  <section id="how" class="sec b-gun on-dark" style="padding-top:40px">
+    <div class="wrap split">
+      <div class="stack">
+        <div class="label">How it works</div>
+        <h2>How laser tattoo removal works</h2>
+        <p class="muted">The laser sends very short pulses of light into the skin. The ink absorbs the energy and breaks into tiny particles.</p>
+        <p class="muted">Over the following weeks your body clears those particles away naturally. That's why the tattoo keeps fading between sessions, and why sessions are 6–8 weeks apart.</p>
+        <figure class="film macro">
+          <video id="macroVid" src="https://stanleykobrick.github.io/removaltattoo/macrophage.mp4" poster="https://stanleykobrick.github.io/removaltattoo/macrophage-poster.jpg" muted loop playsinline preload="metadata" aria-label="Illustration: an immune cell (macrophage) collecting broken-down ink particles in the skin"></video>
+          <figcaption>Inside the skin · a macrophage collects the broken ink</figcaption>
+        </figure>
+      </div>
+      <div class="vid">
+        <video id="howVid" src="https://stanleykobrick.github.io/removaltattoo/how.mp4" poster="https://stanleykobrick.github.io/removaltattoo/how-poster.jpg" muted loop playsinline preload="metadata"></video>
+        <button class="snd" type="button" data-for="howVid" aria-pressed="false">Sound on</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec b-gun2 on-dark">
+    <div class="wrap">
+      <div class="head">
+        <div class="label">Your path</div>
+        <h2>From photo to clear skin</h2>
+      </div>
+      <ol class="steps">
+        <li class="step metal"><h3>Send a photo</h3><p class="muted">By email or Instagram DM. Get a price and a rough number of sessions.</p></li>
+        <li class="step metal"><h3>Free online consultation</h3><p class="muted">I look at your photo and tell you honestly what to expect.</p></li>
+        <li class="step metal"><h3>Short sessions</h3><p class="muted">Usually 5–15 minutes, every 6–8 weeks, by appointment.</p></li>
+        <li class="step metal"><h3>Aftercare</h3><p class="muted">Simple written instructions, and questions answered between sessions.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec b-film on-dark">
+    <div class="wrap">
+      <div class="head">
+        <div class="label">In motion</div>
+        <h2>Scan, break, clear</h2>
+        <p class="muted">The short film for social media. It plays quietly on a loop; turn the sound on if you like.</p>
+      </div>
+      <div class="film">
+        <video id="promoVid" src="https://stanleykobrick.github.io/removaltattoo/promo-loop.mp4" poster="https://stanleykobrick.github.io/removaltattoo/promo-poster.jpg" muted loop playsinline preload="metadata"></video>
+        <button class="snd" type="button" data-for="promoVid" aria-pressed="false">Sound on</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="sec b-deep on-dark">
+    <div class="wrap split">
+      <div class="portrait metal photo"><img src="https://stanleykobrick.github.io/removaltattoo/about.webp" alt="Andrew, laser tattoo removal specialist, sitting in a leather armchair" width="920" height="820" loading="lazy"></div>
+      <div class="stack">
+        <div class="label">About me</div>
+        <h2>Hi, I'm Andrew</h2>
+        <p class="muted">I've specialised in laser tattoo removal for over 13 years, and I now work from Wolf Ink Studios on Queen Street in the centre of Exeter.</p>
+        <p class="muted">The result depends mostly on the person holding the laser. The right distance, power and technique for each skin type and ink only come with practice. My equipment is modern and well maintained, and experience is what keeps scarring to a minimum.</p>
+        <p class="muted">I originally come from Siberia, and I'm proud to call Exeter home.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec b-deep on-dark" style="padding-top:0">
+    <div class="wrap">
+      <div class="revpanel metal">
+        <div class="stack">
+          <div class="label">Reviews</div>
+          <h2>What clients say</h2>
+          <p class="muted">Client reviews are collected on Google for Wolf Ink Studios, the studio on Queen Street where I work.</p>
+        </div>
+        <div class="revside">
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <a class="btn btn-main" href="https://www.google.com/maps/search/?api=1&amp;query=Wolf+Ink+Studios+83+Queen+St+Exeter" target="_blank" rel="noopener">Read reviews on Google</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="sec b-deep2 on-dark hex hex-soft">
+    <div class="wrap">
+      <div class="head"><div class="label">FAQ</div><h2>Questions people ask</h2></div>
+      <div class="faq">
+        <details><summary>How many sessions will I need?<span aria-hidden="true">+</span></summary><p>Most tattoos need 5–12 sessions for full removal; fading for a cover-up usually takes 2–4. Small fine-line tattoos can clear much faster, and eyebrow tattoos (microblading) usually need just 1–2 sessions. It depends on the ink, colours, age and your skin. Send a photo for a personal estimate.</p></details>
+        <details><summary>Does it hurt?<span aria-hidden="true">+</span></summary><p>Most people compare it to a rubber band snapping on the skin. Sessions are short, and cooling makes it more comfortable.</p></details>
+        <details><summary>How long between sessions?<span aria-hidden="true">+</span></summary><p>6–8 weeks. Your body needs time to clear the broken-down ink, which gives better results and protects your skin.</p></details>
+        <details><summary>Will it leave a scar?<span aria-hidden="true">+</span></summary><p>With the right settings and good aftercare the risk is low. Following the aftercare matters as much as the session itself.</p></details>
+        <details><summary>Can coloured tattoos be removed?<span aria-hidden="true">+</span></summary><p>Black and dark blue respond best. Red, green and light colours can take more sessions, and some may only fade. I'll tell you honestly what to expect.</p></details>
+        <details><summary>How much does it cost?<span aria-hidden="true">+</span></summary><p>Tiny tattoos (dots, small birds) from £30 per session, standard tattoos from £60, eyebrow tattoo (microblading) from £80. Email or DM a photo on Instagram for an exact quote.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="on-dark hex hex-soft">
+  <div class="wrap foot">
+    <div>
+      <h2>Book your free consultation</h2>
+      <div class="copyline"><span id="mail">wolfinklaser@gmail.com</span><button type="button" id="copy">Copy email</button></div>
+      <div class="cta">
+        <a class="btn btn-main" href="mailto:wolfinklaser@gmail.com?subject=Tattoo%20removal%20quote">Email a photo</a>
+        <a class="btn btn-ghost" href="https://ig.me/m/andrew_laserman" target="_blank" rel="noopener">Instagram</a>
+      </div>
+      <p class="small">Messages only. I reply to every photo personally.</p>
+    </div>
+    <div class="info">
+      <div class="label" style="margin-bottom:6px">Find me</div>
+      <strong>Wolf Ink Studios</strong>
+      <span class="muted">83–84 Queen St, Exeter EX4 3RP</span>
+      <span class="muted">Every day, 2 pm – 8 pm · by appointment only</span>
+      <a href="https://maps.google.com/?q=Wolf+Ink+Studios+83+Queen+St+Exeter" target="_blank" rel="noopener" style="margin-top:8px">Get directions →</a>
+    </div>
+  </div>
+</footer>
+
+<div class="dock">
+  <a class="btn btn-main" href="mailto:wolfinklaser@gmail.com?subject=Tattoo%20removal%20quote">Email a photo</a>
+  <a class="btn btn-ghost" href="https://ig.me/m/andrew_laserman" target="_blank" rel="noopener">Instagram</a>
+</div>
+
+<script src="https://stanleykobrick.github.io/removaltattoo/hexbg.js"></script>
+<script>
+(function(){
+  var fields=[];
+  document.querySelectorAll('.hex').forEach(function(el){fields.push(RTHex.attach(el,{intensity:el.classList.contains('hex-soft')?0.7:1,avoidLeft:el.classList.contains('hero')?0.5:0.6}));});
+})();
+</script>
+<script src="https://stanleykobrick.github.io/removaltattoo/hero3.js"></script>
+<script>
+(function(){
+  // hero canvas loop + phase captions (12 s loop)
+  var cv=document.getElementById('hero'),ctx=cv.getContext('2d'),box=cv.parentNode,vis=true,t0=performance.now(),W=0,H=0;
+  var still=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var phases=[].slice.call(document.querySelectorAll('#phases li')),cur=0;
+  function phase(t){var p=t%12,i=p<4.4?0:p<9.4?1:2;if(i!==cur){phases[cur].classList.remove('on');phases[i].classList.add('on');cur=i;}}
+  function draw(t){if(window.RTHero){RTHero.render(ctx,t,W,H);phase(t);}}
+  function size(){var r=box.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2);W=Math.max(2,Math.round(r.width*d));H=Math.max(2,Math.round(r.height*d));cv.width=W;cv.height=H;draw(still?0.5:(performance.now()-t0)/1000);}
+  function loop(n){if(vis&&!still)draw((n-t0)/1000);requestAnimationFrame(loop);}
+  if('ResizeObserver' in window)new ResizeObserver(size).observe(box);else addEventListener('resize',size);
+  if('IntersectionObserver' in window)new IntersectionObserver(function(e){vis=e[0].isIntersecting;}).observe(box);
+  size();requestAnimationFrame(loop);
+
+  // videos: play muted while on screen, pause off screen; sound only on request
+  function play(v){var p=v.play();if(p&&p.catch)p.catch(function(){});}
+  ['howVid','promoVid','macroVid','frostVid'].forEach(function(id){
+    var v=document.getElementById(id);
+    if(still){v.removeAttribute('loop');return;}
+    if('IntersectionObserver' in window)new IntersectionObserver(function(e){if(e[0].isIntersecting)play(v);else v.pause();},{threshold:.35}).observe(v);
+    else play(v);
+  });
+  document.querySelectorAll('.snd').forEach(function(b){
+    b.addEventListener('click',function(){
+      var v=document.getElementById(b.dataset.for),on=v.muted;
+      v.muted=!on;
+      if(on){v.volume=0.7;v.currentTime=0;play(v);}
+      b.textContent=on?'Sound off':'Sound on';b.setAttribute('aria-pressed',on?'true':'false');
+    });
+  });
+
+  // copy email
+  document.getElementById('copy').addEventListener('click',function(){
+    var b=this,t=document.getElementById('mail').textContent;
+    function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected, press Ctrl+C';}
+    try{navigator.clipboard.writeText(t).then(function(){b.textContent='Copied';},sel);}catch(e){sel();}
+  });
+})();
+</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HealthAndBeautyBusiness", "name": "Andrew Laserman — Laser Tattoo Removal Exeter", "url": "https://removaltattoo.co.uk/", "image": "https://stanleykobrick.github.io/removaltattoo/about.webp", "logo": "https://stanleykobrick.github.io/removaltattoo/logo.webp", "email": "wolfinklaser@gmail.com", "description": "Laser tattoo and eyebrow tattoo (microblading) removal in Exeter city centre. 13 years' experience, minimal scarring, free online consultation.", "address": {"@type": "PostalAddress", "streetAddress": "Wolf Ink Studios, 83-84 Queen St", "addressLocality": "Exeter", "postalCode": "EX4 3RP", "addressCountry": "GB"}, "geo": {"@type": "GeoCoordinates", "latitude": 50.7246, "longitude": -3.5343}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "14:00", "closes": "20:00"}], "priceRange": "££", "sameAs": ["https://www.instagram.com/andrew_laserman"], "makesOffer": [{"@type": "Offer", "name": "Laser removal of tiny tattoos", "priceSpecification": {"@type": "PriceSpecification", "minPrice": 30, "priceCurrency": "GBP"}}, {"@type": "Offer", "name": "Laser tattoo removal", "priceSpecification": {"@type": "PriceSpecification", "minPrice": 60, "priceCurrency": "GBP"}}, {"@type": "Offer", "name": "Eyebrow tattoo (microblading) removal", "priceSpecification": {"@type": "PriceSpecification", "minPrice": 80, "priceCurrency": "GBP"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How many sessions will I need?", "acceptedAnswer": {"@type": "Answer", "text": "Most tattoos need 5–12 sessions for full removal; fading for a cover-up usually takes 2–4. Small fine-line tattoos can clear much faster, and eyebrow tattoos (microblading) usually need just 1–2 sessions. It depends on the ink, colours, age and your skin. Send a photo for a personal estimate."}}, {"@type": "Question", "name": "Does it hurt?", "acceptedAnswer": {"@type": "Answer", "text": "Most people compare it to a rubber band snapping on the skin. Sessions are short, and cooling makes it more comfortable."}}, {"@type": "Question", "name": "How long between sessions?", "acceptedAnswer": {"@type": "Answer", "text": "6–8 weeks. Your body needs time to clear the broken-down ink, which gives better results and protects your skin."}}, {"@type": "Question", "name": "Will it leave a scar?", "acceptedAnswer": {"@type": "Answer", "text": "With the right settings and good aftercare the risk is low. Following the aftercare matters as much as the session itself."}}, {"@type": "Question", "name": "Can coloured tattoos be removed?", "acceptedAnswer": {"@type": "Answer", "text": "Black and dark blue respond best. Red, green and light colours can take more sessions, and some may only fade. I'll tell you honestly what to expect."}}, {"@type": "Question", "name": "How much does it cost?", "acceptedAnswer": {"@type": "Answer", "text": "Tiny tattoos (dots, small birds) from £30 per session, standard tattoos from £60, eyebrow tattoo (microblading) from £80. Email or DM a photo on Instagram for an exact quote."}}]}</script>
