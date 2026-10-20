@@ -9,7 +9,7 @@
   function easeOut(x) { x = x < 0 ? 0 : x > 1 ? 1 : x; return 1 - Math.pow(1 - x, 3); }
   function ang(k) { return k * Math.PI / 3; } // flat-top: vertices at 0°, 60°, …
 
-  var LEVELS = 24;
+  var LEVELS = 14;
 
   function Field(cv, opt) { this.cv = cv; this.ctx = cv.getContext('2d'); this.opt = opt || {}; }
 
@@ -65,7 +65,7 @@
       if (kind < 0.18) { h0 = 0.62; amp = 0.3; }        // risers
       else if (kind < 0.32) { h0 = 0.18; amp = 0.16; }  // sinkers
       else { h0 = 0.38 + (hash(c, r + 5) - 0.5) * 0.08; amp = 0.05; }
-      cells.push({ x: x, y: y, h0: h0, amp: amp, per: 44 + hash(c + 3, r) * 36, ph: hash(r + 1, c + 2) * TAU });
+      cells.push({ x: x, y: y, h0: h0, amp: amp, per: 22 + hash(c + 3, r) * 18, ph: hash(r + 1, c + 2) * TAU });
     }
     this.cells = cells; this.verts = verts; this.adj = adj;
     this.sprites();
@@ -147,10 +147,8 @@
     for (var i = 0; i < list.length; i++) { var c = list[i]; c.h = Math.max(0, Math.min(1, c.h0 + c.amp * Math.sin(TAU * t / c.per + c.ph))); }
     list.sort(function (a, b) { return a.h - b.h; });
     for (var j = 0; j < list.length; j++) {
-      // blend the two nearest height sprites, so shadows and shading change continuously (no steps)
-      var cl = list[j], lf = cl.h * (LEVELS - 1), l0 = Math.min(LEVELS - 2, Math.floor(lf)), fr = lf - l0, lift = (cl.h - 0.38) * 5 * this.dpr;
-      g.drawImage(this.spr[l0], cl.x - half, cl.y - half - lift);
-      if (fr > 0.004) { g.globalAlpha = fr; g.drawImage(this.spr[l0 + 1], cl.x - half, cl.y - half - lift); g.globalAlpha = 1; }
+      var cl = list[j], l = Math.round(cl.h * (LEVELS - 1)), lift = (cl.h - 0.38) * 5 * this.dpr;
+      g.drawImage(this.spr[l], cl.x - half, cl.y - half - lift);
     }
     // gold seams: each slot lights up slowly from the middle, holds, then fades; strength varies
     var slots = W / this.dpr < 700 ? 3 : 4, T = 16;
