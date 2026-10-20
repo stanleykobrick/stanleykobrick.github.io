@@ -65,7 +65,7 @@
       if (kind < 0.18) { h0 = 0.62; amp = 0.3; }        // risers
       else if (kind < 0.32) { h0 = 0.18; amp = 0.16; }  // sinkers
       else { h0 = 0.38 + (hash(c, r + 5) - 0.5) * 0.08; amp = 0.05; }
-      cells.push({ x: x, y: y, h0: h0, amp: amp, per: 22 + hash(c + 3, r) * 18, ph: hash(r + 1, c + 2) * TAU });
+      cells.push({ x: x, y: y, h0: h0, amp: amp, per: 44 + hash(c + 3, r) * 36, ph: hash(r + 1, c + 2) * TAU });
     }
     this.cells = cells; this.verts = verts; this.adj = adj;
     this.sprites();
